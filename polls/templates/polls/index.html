@@ -1,32 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Poll App</title>
-  </head>
-  <body>
-    <h1>Available Poll Questions</h1>
-    <!-- <ul>
-      {% for question in latest_question_list %}
-      <li>{{ question.question_text }}</li>
-      {% empty %}
-      <li>No polls are available.</li>
-      {% endfor %}
-    </ul> -->
-    <ul>
-      {% for question in latest_question_list %}
-      <li>
-        {{ question.question_text }}
-        <ul>
-          {% for choice in question.choice_set.all %}
-          <li>{{ choice.choice_text }}</li>
-          {% empty %}
-          <li>No choices available for this question.</li>
-          {% endfor %}
+    <head> 
+        <title>Poll App</title>
+    </head>
+    <body>
+        <h1>Avaliable Poll Questions</h1>
+        {% if questions %}
+         <ul>
+            {% for question in questions %}
+            <li>
+               <a href="{% url 'detail' question.id %}">{{ question.question_text }}</a>
+            </li>
+            {% endfor %}
         </ul>
-      </li>
-      {% empty %}
-      <li>No polls are available.</li>
-      {% endfor %}
-    </ul>
-  </body>
+        {% else %}
+        <p>No questions available.</p>
+        {% endif %}
+    </body>
 </html>
